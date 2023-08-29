@@ -66,7 +66,73 @@ class Spacecraft {
                 break;
         }
     }
-
+    turnLeft() {
+        // the logic to turn left
+        switch (this.direction) {
+            case 'N':
+                this.direction = 'W';
+                break;
+            case 'S':
+                this.direction = 'E';
+                break;
+            case 'E':
+                this.direction = 'N';
+                break;
+            case 'W':
+                this.direction = 'S';
+                break;
+        }
+        if(this.direction == 'U' || this.direction == 'D'){
+                switch (this.prev_direction) {
+                    case 'N':
+                        this.direction = 'W';
+                        break;
+                    case 'S':
+                        this.direction = 'E';
+                        break;
+                    case 'E':
+                        this.direction = 'N';
+                        break;
+                    case 'W':
+                        this.direction = 'S';
+                        break;
+                    }
+                }   
+            }
+    turnRight() {
+        // the logic to turn right
+        switch (this.direction) {
+            case 'N':
+                this.direction = 'E';
+                break;
+            case 'S':
+                this.direction = 'W';
+                break;
+            case 'E':
+                this.direction = 'S';
+                break;
+            case 'W':
+                this.direction = 'N';
+                break;
+        }
+        if(this.direction == 'U' || this.direction == 'D'){
+            switch (this.prev_direction) {
+                case 'N':
+                    this.direction = 'E';
+                    break;
+                case 'S':
+                    this.direction = 'W';
+                    break;
+                case 'E':
+                    this.direction = 'S';
+                    break;
+                case 'W':
+                    this.direction = 'N';
+                    break;
+                }
+            }   
+        }
+    
     
 
 }
