@@ -36,4 +36,10 @@ describe('Spacecraft Control', () => {
         spacecraft.turnDown();
         expect(spacecraft.getDirection()).toBe('D');
     });
+    test('Execute Commands', () => {
+        const commands = ['f', 'r', 'u', 'b', 'l'];
+        spacecraft.executeCommands(commands);
+        expect(spacecraft.getPosition()).toEqual({ x: 0, y: 1, z: -1 });
+        expect(spacecraft.getDirection()).toBe('N');
+    });
 }
