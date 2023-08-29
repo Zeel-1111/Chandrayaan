@@ -132,7 +132,63 @@ class Spacecraft {
                 }
             }   
         }
-    
-    
+    turnUp() {
+        // the logic to turn up
 
+        if (this.direction === 'N' || this.direction === 'E') {
+            this.prev_direction = this.direction;
+            this.direction = 'U';
+        } 
+        else if (this.direction === 'S' || this.direction === 'W') {
+            this.prev_direction = this.direction;
+            this.direction = 'D';
+        }
+    }
+
+    turnDown() {
+        // the logic to turn down
+
+        if (this.direction === 'N' || this.direction === 'E') {
+            this.prev_direction = this.direction;
+            this.direction = 'D';
+        } 
+        else if (this.direction === 'S' || this.direction === 'W') {
+            this.prev_direction = this.direction;
+            this.direction = 'U';
+        }
+    }
+
+    executeCommands(commands) {
+        // the logic to execute a sequence of commands
+        for (const command of commands) {
+            switch (command) {
+                case 'f':
+                    this.moveForward();
+                    break;
+                case 'b':
+                    this.moveBackward();
+                    break;
+                case 'l':
+                    this.turnLeft();
+                    break;
+                case 'r':
+                    this.turnRight();
+                    break;
+                case 'u':
+                    this.turnUp();
+                    break;
+                case 'd':
+                    this.turnDown();
+                    break;
+            }
+        }
+    };
+
+    getPosition(){
+        return { x: this.x, y: this.y, z: this.z };
+    }
+
+    getDirection(){
+        return this.direction;
+    }
 }
