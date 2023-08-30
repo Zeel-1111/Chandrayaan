@@ -1,3 +1,7 @@
+/* Assumption made from the example of commands given in the blog
+1) Initially spacecraft is plaed horizontally 
+2)) When Upward command is given it rotates 90 degree and makes vertical position in the given example so the upward command will rotate spacecraft 90 degree in anticlockwise direction*/
+
 class Spacecraft {
     //Constructor for 
     constructor(x, y, z, direction,prev_direction) {
@@ -9,6 +13,7 @@ class Spacecraft {
     }
     moveForward() {
         // logic to move forward
+        //y coordinate for North and South direction
         switch (this.direction) {
             case 'N':
                 this.y++;
@@ -18,6 +23,7 @@ class Spacecraft {
                 this.y--;
                 console.log("South",this.y);
                 break;
+            //x coordinate for East and West direction
             case 'E':
                 this.x++;
                 console.log("East",this.x);
@@ -26,6 +32,7 @@ class Spacecraft {
                 this.x--;
                 console.log("West",this.x);
                 break;
+            //z coordinate for North and South direction
             case 'U':
                 this.z++;
                 console.log("Up",this.z);
@@ -82,7 +89,9 @@ class Spacecraft {
                 this.direction = 'S';
                 break;
         }
-        if(this.direction == 'U' || this.direction == 'D'){
+        /*When facing of spacecraft is upwards or downwards we have to consider prev_direction which contains 
+        directions from 'N','E','W','S' */     
+            if(this.direction == 'U' || this.direction == 'D'){
                 switch (this.prev_direction) {
                     case 'N':
                         this.direction = 'W';
@@ -115,6 +124,8 @@ class Spacecraft {
                 this.direction = 'N';
                 break;
         }
+        /*When facing of spacecraft is upwards or downwards we will consider prev_direction which contains 
+        directions from 'N','E','W','S' */     
         if(this.direction == 'U' || this.direction == 'D'){
             switch (this.prev_direction) {
                 case 'N':
@@ -135,27 +146,19 @@ class Spacecraft {
     turnUp() {
         // the logic to turn up
 
-        if (this.direction === 'N' || this.direction === 'E') {
+        if (this.direction === 'N' || this.direction === 'E' || this.direction === 'S' || this.direction === 'W') {
             this.prev_direction = this.direction;
             this.direction = 'U';
         } 
-        else if (this.direction === 'S' || this.direction === 'W') {
-            this.prev_direction = this.direction;
-            this.direction = 'D';
-        }
     }
 
     turnDown() {
         // the logic to turn down
 
-        if (this.direction === 'N' || this.direction === 'E') {
+        if (this.direction === 'N' || this.direction === 'E' ||this.direction === 'S' || this.direction === 'W'){
             this.prev_direction = this.direction;
             this.direction = 'D';
         } 
-        else if (this.direction === 'S' || this.direction === 'W') {
-            this.prev_direction = this.direction;
-            this.direction = 'U';
-        }
     }
 
     executeCommands(commands) {
@@ -192,3 +195,8 @@ class Spacecraft {
         return this.direction;
     }
 }
+const spacecraft = new Spacecraft(0, 0, 0, 'N');
+const commands = ['f','r','u'];
+spacecraft.executeCommands(commands);
+
+module.exports = Spacecraft;
